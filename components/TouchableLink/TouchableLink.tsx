@@ -1,4 +1,4 @@
-import { Text, StyleProp, StyleSheet, TextStyle, TouchableOpacity, ViewStyle } from "react-native";
+import { View, Text, StyleProp, StyleSheet, TextStyle, TouchableOpacity, ViewStyle } from "react-native";
 import * as React from "react";
 import { commonColor } from "../../constants/Colors";
 
@@ -14,6 +14,7 @@ interface IProps {
     type?: LinkType;
     style?: StyleProp<ViewStyle>;
     styleText?: StyleProp<TextStyle>;
+    underlineText?: string;
 }
 
 function textStyle(type: LinkType): StyleProp<TextStyle> {
@@ -38,15 +39,20 @@ export default function TouchableLink(props: IProps) {
         <TouchableOpacity onPress={props.onPress} style={[
             styles.container,
             props.style
-        ]}>
-            <Text style={[
-                textStyle(props.type || LinkType.primary)
-                , props.styleText]}
+        ]}
+            activeOpacity={1}
+        >
+            <Text style={props.styleText}
                 allowFontScaling
                 adjustsFontSizeToFit
                 numberOfLines={1}
             >
-                <Text style={[props.styleText]}>{props.title}</Text>
+                <Text style={[props.styleText]}>
+                    {props.title}
+                    {props.underlineText && (
+                        <Text style={{ textDecorationLine: 'underline', color: commonColor.main }}>{props.underlineText}</Text>
+                    )}
+                </Text>
             </Text>
         </TouchableOpacity>
     )

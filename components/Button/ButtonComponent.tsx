@@ -99,6 +99,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignSelf: "stretch",
         borderRadius: 10,
+        shadowColor: undefined, // IOS
+        shadowOffset: { height: 3, width: 0 }, // IOS
+        shadowOpacity: 0.4, // IOS
+        shadowRadius: 4, //IOS
+        elevation: 4, // Android
+        backgroundColor: "white",
     },
     text: {
         textAlign: "center",

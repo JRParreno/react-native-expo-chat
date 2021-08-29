@@ -16,6 +16,7 @@ import { commonColor } from "../../constants/Colors";
 interface IProps {
   style?: StyleProp<ViewStyle>;
   inputStyle?: StyleProp<ViewStyle>;
+  shadow?: boolean;
   value: string;
   placeholder?: string;
   onChange?: any;
@@ -53,7 +54,7 @@ export default function TextField(props: IProps) {
         </Text>
       )}
 
-      <View style={[styles.inputSection, props.style]}>
+      <View style={[styles.inputSection, props.style, props.shadow ? styles.shadow : { }]}>
         {props.iconLeftName ? <Ionicons name={props.iconLeftName} size={20} style={[styles.iconStyle, { display: props.iconVisible ? "flex" : "none" }]} onPress={props.onPressLeftIcon} /> : null}
         <TextInput
           style={[styles.textInput, props.textStyle]}
@@ -143,5 +144,13 @@ const styles = StyleSheet.create({
     fontSize: normalize(12),
     fontFamily: 'poppins-regular',
     color: "#262626",
+  },
+  shadow: {
+    shadowColor: undefined, // IOS
+    shadowOffset: { height: 6, width: 0 }, // IOS
+    shadowOpacity: 0.2, // IOS
+    shadowRadius: 4, //IOS
+    elevation: 5, // Android
+    backgroundColor: "white",
   }
 });

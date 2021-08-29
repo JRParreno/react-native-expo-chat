@@ -1,19 +1,13 @@
 import * as React from 'react';
 import { ActivityIndicator, PixelRatio, StyleSheet, View } from 'react-native';
-import LottieView from 'lottie-react-native';
 import { commonColor } from '../constants/Colors';
 
 
 export default function Loader() {
     return (
         <View style={styles.fullScreen}>
-            {/* uncomment this to use default animation of react and remove lottie container */}
-            {/* <View style={styles.container}>
-                <ActivityIndicator size="large" color="#000"/>
-            </View> */}
-
             <View style={styles.container}>
-                <LottieView style={{ flex: 0, backgroundColor: commonColor.transparent }} source={require("../assets/lottiefiles/loading-animation.json")} autoPlay loop />
+                <ActivityIndicator size="large" color="#000" />
             </View>
         </View>
     );

@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { KeyboardAvoidingView, Platform, SafeAreaView, StyleProp, StyleSheet, ViewStyle } from "react-native";
+import { KeyboardAvoidingView, StatusBar, Platform, StyleProp, StyleSheet, ViewStyle } from "react-native";
 import Loader from "./Loader";
-import { HeaderHeightContext } from "@react-navigation/stack";
+import { HeaderHeightContext } from "@react-navigation/elements";
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface HeaderProps {
     children: React.ReactNodeArray | React.ReactNode,
@@ -15,9 +16,9 @@ const ViewWithLoading = ({ children, style, loading }: HeaderProps) => (
             <KeyboardAvoidingView
                 style={[style, {
                     flex: 1,
-                    backgroundColor: '#F1F6FE',
+                    backgroundColor: 'white',
                 }]}
-                behavior={Platform.select({ ios: 'padding' })}
+                behavior={Platform.select({ ios: 'height' })}
                 keyboardVerticalOffset={(headerHeight || 0)}
             >
                 <SafeAreaView style={[styles.container, {
@@ -35,5 +36,9 @@ const ViewWithLoading = ({ children, style, loading }: HeaderProps) => (
 export default ViewWithLoading;
 
 const styles = StyleSheet.create({
-    container: {},
+    container: {
+        flex: 1,
+        backgroundColor: "#fff",
+        // paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
+    }
 })
