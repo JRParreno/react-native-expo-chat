@@ -10,6 +10,8 @@ import { NonAuthParamList } from '../types';
 //  uncomment to use as default non auth screens
 import { LoginScreen, RegisterScreen } from "../screens/Non-Auth/";
 import ChatScreen from '../screens/Chat/ChatScreen';
+import ProfileScreen from '../screens/Profile/ProfileScreen';
+import { Pressable } from 'react-native';
 
 
 const NonAuthStack = createStackNavigator<NonAuthParamList>();
@@ -34,10 +36,29 @@ export default function NonAuthNavigator() {
                 name="Chat"
                 component={ChatScreen}
                 options={{
+                    title: "Messages",
                     headerShown: true,
                     headerLeftContainerStyle: { paddingLeft: 20 },
                     headerRightContainerStyle: { paddingRight: 20 },
                 }}
+            />
+            <NonAuthStack.Screen
+                name="Profile"
+                component={ProfileScreen}
+                options={({ navigation }) => (
+                    {
+                        headerShown: true,
+                        headerLeftContainerStyle: { paddingLeft: 20 },
+                        headerRightContainerStyle: { paddingRight: 20 },
+                        headerLeft: () => (
+                            <Pressable
+                                onPress={() => navigation.goBack()}
+                            >
+                                <Ionicons name={"chevron-back"} size={24} />
+                            </Pressable>
+                        ),
+                    }
+                )}
             />
         </NonAuthStack.Navigator>
     );

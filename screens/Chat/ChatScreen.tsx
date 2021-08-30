@@ -1,17 +1,11 @@
 import * as React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import ViewWithLoading from '../../components/ViewWithLoading';
-import LottieView from 'lottie-react-native';
 import { commonColor } from '../../constants/Colors';
-import TextField from '../../components/TextInput/TextField';
-import { useCallback, useEffect, useLayoutEffect, useState } from 'react';
-import ButtonComponent, { ButtonType } from '../../components/Button/ButtonComponent';
-import { normalize } from '../../constants/FontStyles';
-import TouchableLink from '../../components/TouchableLink/TouchableLink';
+import { useCallback, useLayoutEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/core';
 import { auth, db } from '../../firebase';
 import { Ionicons } from '@expo/vector-icons';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Avatar } from 'react-native-elements';
 import { GiftedChat } from 'react-native-gifted-chat';
 
@@ -30,36 +24,15 @@ export default function ChatScreen() {
             headerShown: true,
             headerRight: () => (
                 <Pressable
-                    onPress={handleSignOut}
-                >
-                    <Ionicons name={"log-out-outline"} size={24} color={commonColor.main} />
-                </Pressable>
-            ),
-            headerLeft: () => (
-                <Pressable
-                    onPress={() => { }}
+                    onPress={() => navigation.navigate('Profile')}
                 >
                     <Avatar rounded source={{ uri: auth?.currentUser?.photoURL }} />
                 </Pressable>
-            )
-
+            ),
+            headerLeft: () => null,
         });
     }, []);
 
-    // useEffect(() => {
-    //     setMessages([
-    //         {
-    //             _id: 1,
-    //             text: 'Hello developer',
-    //             createdAt: new Date(),
-    //             user: {
-    //                 _id: 2,
-    //                 name: 'React Native',
-    //                 avatar: 'https://placeimg.com/140/140/any',
-    //             },
-    //         },
-    //     ]);
-    // }, []);
 
     useLayoutEffect(() => {
         const unsubscribe = db.collection('chats')
@@ -112,9 +85,9 @@ export default function ChatScreen() {
                     showAvatarForEveryMessage={true}
                     onSend={messages => onSend(messages)}
                     user={{
-                        _id: auth.currentUser?.email,
-                        name: auth.currentUser?.displayName,
-                        avatar: auth.currentUser?.photoURL
+                        _id: auth.currentUser?.email!,
+                        name: auth.currentUser?.displayName!,
+                        avatar: auth.currentUser?.photoURL!
                     }}
                 />
             </View>

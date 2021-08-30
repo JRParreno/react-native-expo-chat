@@ -29,4 +29,5 @@ export type NonAuthParamList = {
   Register: undefined;
   ForgotPassword: undefined;
   Chat: undefined;
+  Profile: undefined;
 };

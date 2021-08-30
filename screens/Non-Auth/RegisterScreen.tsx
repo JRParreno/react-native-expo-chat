@@ -46,7 +46,7 @@ export default function RegisterScreen() {
             }).catch(e => {
                 let errorCode = e.code;
                 let errorMessage = e.message;
-                Alert.alert(errorMessage);
+                Alert.alert("", errorMessage);
             }).finally(() => setLoading(false));
     }
 
